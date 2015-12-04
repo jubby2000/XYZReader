@@ -25,4 +25,6 @@
     <color name="primary_text_color">#DE000000</color>
     <color name="secondary_text_color">#8A000000</color>
     <color name="hint_text_color">#61000000</color>
+    <color name="dark_background_primary_text_color">#FFFFFF</color>
+    <color name="dark_background_secondary_text_color">#B3FFFFFF</color>
 </resources>

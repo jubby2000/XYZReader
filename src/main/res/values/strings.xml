@@ -9,4 +9,7 @@
 
     <string name="up">Up</string>
 
+    <string name="transition_image">Transition Image</string>
+    <string name="transition_text">Transition Text</string>
+
 </resources>
