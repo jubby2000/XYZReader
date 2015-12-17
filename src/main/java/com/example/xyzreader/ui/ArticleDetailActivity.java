@@ -9,9 +9,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
@@ -25,6 +28,8 @@ import com.example.xyzreader.data.ItemsContract;
  */
 public class ArticleDetailActivity extends ActionBarActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    public static final String LOG_TAG = ArticleDetailActivity.class.getSimpleName();
 
     private Cursor mCursor;
     private long mStartId;
@@ -41,6 +46,9 @@ public class ArticleDetailActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.v(LOG_TAG, "Article Detail Activity called.");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
@@ -177,4 +185,14 @@ public class ArticleDetailActivity extends ActionBarActivity
             return (mCursor != null) ? mCursor.getCount() : 0;
         }
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                supportFinishAfterTransition();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

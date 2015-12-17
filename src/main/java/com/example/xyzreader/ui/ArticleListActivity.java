@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.transition.Explode;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -43,6 +44,8 @@ import com.example.xyzreader.data.UpdaterService;
 public class ArticleListActivity extends ActionBarActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    public static final String LOG_TAG = ArticleListActivity.class.getSimpleName();
+
     private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -51,10 +54,12 @@ public class ArticleListActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            Explode explode = new Explode();
-            getWindow().setExitTransition(explode);
-        }
+        Log.v(LOG_TAG, "Article List Activity called.");
+
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            Explode explode = new Explode();
+//            getWindow().setExitTransition(explode);
+//        }
 
         setContentView(R.layout.activity_article_list);
 
@@ -144,21 +149,21 @@ public class ArticleListActivity extends ActionBarActivity implements
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
             final ViewHolder vh = new ViewHolder(view);
-            final ImageView photoView = (ImageView) findViewById(R.id.photo);
-            final LinearLayout linearView = (LinearLayout) findViewById(R.id.headline);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    view.setTransitionName(getString(R.string.transition_image));
-                    Pair<View, String> photoPair = Pair.create((View)photoView,
-                            getString(R.string.transition_image));
-                    Pair<View, String> textPair = Pair.create((View)linearView,
-                            getString(R.string.transition_text));
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                            ArticleListActivity.this, photoPair, textPair);
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))),
-                            options.toBundle());
+                    Log.v(LOG_TAG, "click received");
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        view.setTransitionName(getString(R.string.transition_image));
+                        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
+                                ArticleListActivity.this, view, view.getTransitionName()).toBundle();
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                    }
+
                 }
             });
             return vh;

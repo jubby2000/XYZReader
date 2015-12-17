@@ -23,14 +23,11 @@
         <item name="android:colorPrimary">@color/theme_primary</item>
         <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
         <item name="android:windowContentTransitions">true</item>
-    </style>
+        <item name="android:toolbarStyle">@style/XYZActionBarStyle</item>
 
-    <style name="Theme.Bacon.Detail">
-        <item name="android:textColor">@color/primary_text_color</item>
-        <item name="android:colorAccent">@color/theme_accent</item>
-        <item name="android:colorPrimary">@color/theme_primary</item>
-        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
-        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/grid_exit</item>
+        <item name="android:windowExitTransition">@transition/grid_exit</item>
+
     </style>
     
     <style name="MainCardTitle">
@@ -41,6 +38,9 @@
     <style name="MainCardSubtitle">
         <item name="android:textColor">@color/dark_background_secondary_text_color</item>
         <item name="android:textSize">@dimen/main_card_subtitle_text_size</item>
+    </style>
+    <style name="XYZActionBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/theme_primary</item>
     </style>
 
 </resources>
