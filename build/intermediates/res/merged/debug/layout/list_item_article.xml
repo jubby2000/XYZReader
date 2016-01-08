@@ -23,10 +23,10 @@
             android:scaleType="fitXY"
             android:background="@color/photo_placeholder" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/scrim"/>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/scrim"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,6 +44,10 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
+                android:shadowColor="#000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="20"
                 android:paddingRight="16dp"
                 android:paddingBottom="4dp"
                 style="@style/MainCardTitle"
@@ -55,6 +59,10 @@
                 style="@style/MainCardSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:shadowColor="#000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="20"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"

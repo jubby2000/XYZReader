@@ -39,6 +39,16 @@
         <item name="android:textColor">@color/dark_background_secondary_text_color</item>
         <item name="android:textSize">@dimen/main_card_subtitle_text_size</item>
     </style>
+
+    <style name="DetailTitleExpanded" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
+    <style name="DetailTitleCollapsed">
+        <item name="android:textColor">@color/dark_background_secondary_text_color</item>
+        <item name="android:textSize">@dimen/main_card_subtitle_text_size</item>
+    </style>
+
     <style name="XYZActionBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/theme_primary</item>
     </style>
