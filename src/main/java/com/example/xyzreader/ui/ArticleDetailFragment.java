@@ -1,6 +1,7 @@
 package com.example.xyzreader.ui;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -16,12 +17,14 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -131,7 +134,7 @@ public class ArticleDetailFragment extends Fragment implements
 //        });
 
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
+//        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
 
         mStatusBarColorDrawable = new ColorDrawable(0);
 
@@ -215,8 +218,8 @@ public class ArticleDetailFragment extends Fragment implements
                                 Palette p = Palette.generate(bitmap, 12);
                                 mMutedColor = p.getDarkMutedColor(0xFF333333);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
-                                mRootView.findViewById(R.id.meta_bar);
-                                mRootView.findViewById(R.id.collapsing_toolbar);
+//                                mRootView.findViewById(R.id.meta_bar);
+//                                mRootView.findViewById(R.id.collapsing_toolbar);
 //                                        .setBackgroundColor(mMutedColor);
                                 final CollapsingToolbarLayout collapsingToolbar =
                                         (CollapsingToolbarLayout) mRootView
@@ -232,13 +235,13 @@ public class ArticleDetailFragment extends Fragment implements
                                    @Override
                                    public void onOffsetChanged (AppBarLayout appBarLayout1, int verticalOffset) {
 //                                       collapsingToolbar.setContentScrimColor(mMutedColor);
-                                           if (verticalOffset <= -340) {
+                                           if (verticalOffset <= -300) {
                                                collapsingToolbar.setTitle(mCursor.getString(ArticleLoader
                                                        .Query.TITLE));
                                            } else {
                                                collapsingToolbar.setTitle(null);
                                            }
-//                                       Log.v(LOG_TAG, collapsingToolbar.)
+                                       Log.v(LOG_TAG, String.valueOf(verticalOffset));
                                        }
                                     });
 //                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -295,14 +298,16 @@ public class ArticleDetailFragment extends Fragment implements
         bindViews();
     }
 
-    public int getUpButtonFloor() {
-        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
-            return Integer.MAX_VALUE;
-        }
+//    public int getUpButtonFloor() {
+//        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
+//            return Integer.MAX_VALUE;
+//        }
+//
+//        // account for parallax
+//        return mIsCard
+//                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
+//                : mPhotoView.getHeight() - mScrollY;
+//    }
 
-        // account for parallax
-        return mIsCard
-                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
-                : mPhotoView.getHeight() - mScrollY;
-    }
+
 }

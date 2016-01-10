@@ -156,7 +156,7 @@ public class ArticleListActivity extends ActionBarActivity implements
                     if (Build.VERSION.SDK_INT >= 21) {
                         view.setTransitionName(getString(R.string.transition_image));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                                ArticleListActivity.this, view, view.getTransitionName()).toBundle();
+                                ArticleListActivity.this, view.findViewById(R.id.thumbnail), view.getTransitionName()).toBundle();
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
                     } else {
