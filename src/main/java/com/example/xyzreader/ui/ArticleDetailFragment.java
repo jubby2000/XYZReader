@@ -81,8 +81,6 @@ public class ArticleDetailFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.v(LOG_TAG, "Article Detail Fragment called.");
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             mItemId = getArguments().getLong(ARG_ITEM_ID);
         }
@@ -298,16 +296,16 @@ public class ArticleDetailFragment extends Fragment implements
         bindViews();
     }
 
-//    public int getUpButtonFloor() {
-//        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
-//            return Integer.MAX_VALUE;
-//        }
-//
-//        // account for parallax
-//        return mIsCard
-//                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
-//                : mPhotoView.getHeight() - mScrollY;
-//    }
+    public int getUpButtonFloor() {
+        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
+            return Integer.MAX_VALUE;
+        }
+
+        // account for parallax
+        return mIsCard
+                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
+                : mPhotoView.getHeight() - mScrollY;
+    }
 
 
 }
