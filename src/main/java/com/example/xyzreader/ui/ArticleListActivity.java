@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -34,6 +35,8 @@ import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
 import com.example.xyzreader.data.UpdaterService;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
  * An activity representing a list of Articles. This activity has different presentations for
@@ -60,6 +63,7 @@ public class ArticleListActivity extends ActionBarActivity implements
 //            Explode explode = new Explode();
 //            getWindow().setExitTransition(explode);
 //        }
+        Fresco.initialize(this);
 
         setContentView(R.layout.activity_article_list);
 
@@ -152,7 +156,7 @@ public class ArticleListActivity extends ActionBarActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.v(LOG_TAG, "click received");
+
                     if (Build.VERSION.SDK_INT >= 21) {
                         view.setTransitionName(getString(R.string.transition_image));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
@@ -163,7 +167,7 @@ public class ArticleListActivity extends ActionBarActivity implements
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
                     }
-
+                    Log.v(LOG_TAG, "The cursor position is: "+String.valueOf(mCursor.getPosition()));
                 }
             });
             return vh;
@@ -180,10 +184,17 @@ public class ArticleListActivity extends ActionBarActivity implements
                             DateUtils.FORMAT_ABBREV_ALL).toString()
                             + " by "
                             + mCursor.getString(ArticleLoader.Query.AUTHOR));
-            holder.thumbnailView.setImageUrl(
-                    mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
+
+            Uri uri = Uri.parse(mCursor.getString(ArticleLoader.Query.THUMB_URL));
+//            SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.thumbnail);
+//            draweeView.setImageURI(uri);
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+            holder.thumbnailView.setImageURI(uri);
+
+//            holder.thumbnailView.setImageUrl(
+//                    mCursor.getString(ArticleLoader.Query.THUMB_URL),
+//                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
+
         }
 
         @Override
@@ -193,13 +204,13 @@ public class ArticleListActivity extends ActionBarActivity implements
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public DynamicHeightNetworkImageView thumbnailView;
+        public SimpleDraweeView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
 
         public ViewHolder(View view) {
             super(view);
-            thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+            thumbnailView = (SimpleDraweeView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
         }
