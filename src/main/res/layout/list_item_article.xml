@@ -20,7 +20,7 @@
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:transitionName="@string/transition_image"
+            android:transitionName="Transition Image"
             fresco:actualImageScaleType="focusCrop"
 
             fresco:placeholderImage="@color/photo_placeholder"

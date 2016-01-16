@@ -16,6 +16,18 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-fresco.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-fresco.pro'
+        }
+    }
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 23

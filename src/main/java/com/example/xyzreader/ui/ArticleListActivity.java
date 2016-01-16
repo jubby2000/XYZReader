@@ -57,7 +57,6 @@ public class ArticleListActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.v(LOG_TAG, "Article List Activity called.");
 
 //        if (Build.VERSION.SDK_INT >= 21) {
 //            Explode explode = new Explode();
@@ -158,11 +157,20 @@ public class ArticleListActivity extends ActionBarActivity implements
                 public void onClick(View view) {
 
                     if (Build.VERSION.SDK_INT >= 21) {
-                        view.setTransitionName(getString(R.string.transition_image));
+//                        view.setTransitionName(getString(R.string.transition_image) + mCursor.getPosition());
+//                        view.findViewById(R.id.thumbnail).setTransitionName(getString(R.string.transition_image)+mCursor.getPosition());
+
+                        Log.v(LOG_TAG, view.findViewById(R.id.thumbnail).getTransitionName());
+                        Log.v(LOG_TAG, String.valueOf(mCursor.getLong(ArticleLoader.Query._ID)));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                                ArticleListActivity.this, view.findViewById(R.id.thumbnail), view.getTransitionName()).toBundle();
+                                ArticleListActivity.this, view.findViewById(R.id.thumbnail),
+                                view.findViewById(R.id.thumbnail).getTransitionName()).toBundle();
+//                        bundle.putString("transition", view.findViewById(R.id.thumbnail)
+//                                .getTransitionName());
                         startActivity(new Intent(Intent.ACTION_VIEW,
-                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
+                                ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())))
+                                .putExtra("transition", view.findViewById(R.id.thumbnail)
+                                .getTransitionName()), bundle);
                     } else {
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
@@ -176,6 +184,8 @@ public class ArticleListActivity extends ActionBarActivity implements
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
+            holder.thumbnailView.setTransitionName(getString(R.string.transition_image) + position);
+//            Log.v(LOG_TAG, String.valueOf(mCursor.getLong(ArticleLoader.Query._ID)));
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             holder.subtitleView.setText(
                     DateUtils.getRelativeTimeSpanString(
