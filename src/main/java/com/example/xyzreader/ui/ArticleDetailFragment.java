@@ -111,10 +111,7 @@ public class ArticleDetailFragment extends Fragment implements
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
 
-        mRootView.findViewById(R.id.photo)
-                .setTransitionName(getActivity().getIntent().getStringExtra("transition"));
 
-        Log.v(LOG_TAG, getActivity().getIntent().getStringExtra("transition"));
 //        mDrawInsetsFrameLayout = (DrawInsetsFrameLayout)
 //                mRootView.findViewById(R.id.draw_insets_frame_layout);
 //        mDrawInsetsFrameLayout.setOnInsetsCallback(new DrawInsetsFrameLayout.OnInsetsCallback() {
@@ -201,7 +198,13 @@ public class ArticleDetailFragment extends Fragment implements
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
+            ArticleDetailActivity activity = (ArticleDetailActivity) getActivity();
+            String transitionString = activity.getmTransitionName();
 
+            mRootView.findViewById(R.id.photo)
+                    .setTransitionName(transitionString);
+
+            Log.v(LOG_TAG, transitionString);
             titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             bylineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(

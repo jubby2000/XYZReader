@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -159,18 +160,17 @@ public class ArticleListActivity extends ActionBarActivity implements
                     if (Build.VERSION.SDK_INT >= 21) {
 //                        view.setTransitionName(getString(R.string.transition_image) + mCursor.getPosition());
 //                        view.findViewById(R.id.thumbnail).setTransitionName(getString(R.string.transition_image)+mCursor.getPosition());
-
-                        Log.v(LOG_TAG, view.findViewById(R.id.thumbnail).getTransitionName());
+                        Log.v(LOG_TAG, view.findViewById(R.id.list_card).getTransitionName());
                         Log.v(LOG_TAG, String.valueOf(mCursor.getLong(ArticleLoader.Query._ID)));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                                ArticleListActivity.this, view.findViewById(R.id.thumbnail),
-                                view.findViewById(R.id.thumbnail).getTransitionName()).toBundle();
+                                ArticleListActivity.this, view.findViewById(R.id.list_card),
+                                view.findViewById(R.id.list_card).getTransitionName()).toBundle();
 //                        bundle.putString("transition", view.findViewById(R.id.thumbnail)
 //                                .getTransitionName());
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())))
-                                .putExtra("transition", view.findViewById(R.id.thumbnail)
-                                .getTransitionName()), bundle);
+                                .putExtra("transition", view.findViewById(R.id.list_card)
+                                        .getTransitionName()), bundle);
                     } else {
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
@@ -184,8 +184,9 @@ public class ArticleListActivity extends ActionBarActivity implements
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
-            holder.thumbnailView.setTransitionName(getString(R.string.transition_image) + position);
-//            Log.v(LOG_TAG, String.valueOf(mCursor.getLong(ArticleLoader.Query._ID)));
+//            holder.thumbnailView.setTransitionName(getString(R.string.transition_image) + position);
+            holder.cardView.setTransitionName(getString(R.string.transition_image) + position);
+            Log.v(LOG_TAG, holder.cardView.getTransitionName());
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             holder.subtitleView.setText(
                     DateUtils.getRelativeTimeSpanString(
@@ -217,12 +218,14 @@ public class ArticleListActivity extends ActionBarActivity implements
         public SimpleDraweeView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public CardView cardView;
 
         public ViewHolder(View view) {
             super(view);
             thumbnailView = (SimpleDraweeView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            cardView = (CardView) view.findViewById(R.id.list_card);
         }
     }
 }

@@ -8,6 +8,7 @@
     android:layout_marginRight="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
+    android:id="@+id/list_card"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground">
@@ -20,7 +21,6 @@
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:transitionName="Transition Image"
             fresco:actualImageScaleType="focusCrop"
 
             fresco:placeholderImage="@color/photo_placeholder"

@@ -34,7 +34,6 @@
                     android:id="@+id/photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:transitionName="Transition Image"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"
                     fresco:placeholderImage="@color/photo_placeholder"

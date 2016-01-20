@@ -45,6 +45,7 @@ public class ArticleDetailActivity extends ActionBarActivity
     private MyPagerAdapter mPagerAdapter;
     private View mUpButtonContainer;
     private View mUpButton;
+    private String mTransitionName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,8 @@ public class ArticleDetailActivity extends ActionBarActivity
             public void onPageSelected(int position) {
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
+//                    mTransitionName = getString(R.string.transition_image)+position;
+                    Log.v(LOG_TAG, "name from onPageSelected: "+mTransitionName);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
                 updateUpButtonPosition();
@@ -113,11 +116,17 @@ public class ArticleDetailActivity extends ActionBarActivity
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
-//                Log.v(LOG_TAG, getIntent().getStringExtra("transition"));
+
+                mTransitionName = getIntent().getStringExtra("transition");
                 mStartId = ItemsContract.Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
             }
         }
+    }
+
+    public String getmTransitionName() {
+        Log.v(LOG_TAG, "transition name from get method: "+mTransitionName);
+        return mTransitionName;
     }
 
 
@@ -193,6 +202,7 @@ public class ArticleDetailActivity extends ActionBarActivity
 
         @Override
         public Fragment getItem(int position) {
+
             mCursor.moveToPosition(position);
             return ArticleDetailFragment.newInstance((mCursor.getLong(ArticleLoader.Query._ID)));
         }
