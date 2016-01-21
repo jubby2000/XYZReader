@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
-        "source": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/ic_launcher.png",
         "source": "/Users/jacob/AndroidStudioProjects/XYZReader/src/main/res/mipmap-xhdpi/ic_launcher.png"
     }

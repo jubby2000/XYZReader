@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\build\\intermediates\\res\\merged\\debug\\anim-v21\\fab_state_list_anim.xml",
-        "source": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\src\\main\\res\\anim-v21\\fab_state_list_anim.xml"
-    },
-    {
         "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/build/intermediates/res/merged/debug/anim-v21/fab_state_list_anim.xml",
         "source": "/Users/jacob/AndroidStudioProjects/XYZReader/src/main/res/anim-v21/fab_state_list_anim.xml"
     }
