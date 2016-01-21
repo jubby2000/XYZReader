@@ -1,6 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
-        "source": "C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
+        "source": "/Users/jacob/AndroidStudioProjects/XYZReader/C:\\Users\\Jacob\\Downloads\\xyzreader\\XYZReader\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "/Users/jacob/AndroidStudioProjects/XYZReader/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
+        "source": "/Users/jacob/AndroidStudioProjects/XYZReader/src/main/res/mipmap-mdpi/ic_launcher.png"
     }
 ]

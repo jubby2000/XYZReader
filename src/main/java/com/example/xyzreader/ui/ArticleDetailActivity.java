@@ -3,20 +3,16 @@ package com.example.xyzreader.ui;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -45,7 +41,7 @@ public class ArticleDetailActivity extends ActionBarActivity
     private MyPagerAdapter mPagerAdapter;
     private View mUpButtonContainer;
     private View mUpButton;
-    private String mTransitionName;
+    private Integer mCurrentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +79,8 @@ public class ArticleDetailActivity extends ActionBarActivity
             public void onPageSelected(int position) {
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
-//                    mTransitionName = getString(R.string.transition_image)+position;
-                    Log.v(LOG_TAG, "name from onPageSelected: "+mTransitionName);
+                    mCurrentPosition = position;
+                    Log.v(LOG_TAG, "name from onPageSelected: "+ mCurrentPosition +" and position is: "+position);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
                 updateUpButtonPosition();
@@ -117,16 +113,18 @@ public class ArticleDetailActivity extends ActionBarActivity
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
 
-                mTransitionName = getIntent().getStringExtra("transition");
+//                mCurrentPosition = getIntent().getStringExtra("transition");
+//                Log.v(LOG_TAG, "name from savedInstanceState check: "+mCurrentPosition);
+
                 mStartId = ItemsContract.Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
             }
         }
     }
 
-    public String getmTransitionName() {
-        Log.v(LOG_TAG, "transition name from get method: "+mTransitionName);
-        return mTransitionName;
+    public Integer getmCurrentPosition() {
+        Log.v(LOG_TAG, "transition name from get method: "+ mCurrentPosition);
+        return mCurrentPosition;
     }
 
 
@@ -204,7 +202,7 @@ public class ArticleDetailActivity extends ActionBarActivity
         public Fragment getItem(int position) {
 
             mCursor.moveToPosition(position);
-            return ArticleDetailFragment.newInstance((mCursor.getLong(ArticleLoader.Query._ID)));
+            return ArticleDetailFragment.newInstance((mCursor.getLong(ArticleLoader.Query._ID)), position);
         }
 
         @Override

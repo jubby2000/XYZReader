@@ -160,11 +160,11 @@ public class ArticleListActivity extends ActionBarActivity implements
                     if (Build.VERSION.SDK_INT >= 21) {
 //                        view.setTransitionName(getString(R.string.transition_image) + mCursor.getPosition());
 //                        view.findViewById(R.id.thumbnail).setTransitionName(getString(R.string.transition_image)+mCursor.getPosition());
-                        Log.v(LOG_TAG, view.findViewById(R.id.list_card).getTransitionName());
+                        Log.v(LOG_TAG, view.findViewById(R.id.thumbnail).getTransitionName());
                         Log.v(LOG_TAG, String.valueOf(mCursor.getLong(ArticleLoader.Query._ID)));
                         Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                                ArticleListActivity.this, view.findViewById(R.id.list_card),
-                                view.findViewById(R.id.list_card).getTransitionName()).toBundle();
+                                ArticleListActivity.this, view.findViewById(R.id.thumbnail),
+                                view.findViewById(R.id.thumbnail).getTransitionName()).toBundle();
 //                        bundle.putString("transition", view.findViewById(R.id.thumbnail)
 //                                .getTransitionName());
                         startActivity(new Intent(Intent.ACTION_VIEW,
@@ -185,8 +185,8 @@ public class ArticleListActivity extends ActionBarActivity implements
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
 //            holder.thumbnailView.setTransitionName(getString(R.string.transition_image) + position);
-            holder.cardView.setTransitionName(getString(R.string.transition_image) + position);
-            Log.v(LOG_TAG, holder.cardView.getTransitionName());
+            holder.thumbnailView.setTransitionName(getString(R.string.transition_image) + position);
+            Log.v(LOG_TAG, holder.thumbnailView.getTransitionName());
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             holder.subtitleView.setText(
                     DateUtils.getRelativeTimeSpanString(
